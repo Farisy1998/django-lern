@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Site Metas -->
+    <title>LERN - Education Made Simple</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="apple-touch-icon" href='{% static "index/images/apple-touch-icon.png" %}'>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='{% static "index/css/bootstrap.min.css" %}'>
+    <!-- Site CSS -->
+    <link rel="stylesheet" href='{% static "index/style.css" %}'>
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href='{% static "index/css/versions.css" %}'>
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href='{% static "index/css/responsive.css" %}'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href='{% static "index/css/custom.css" %}'>
+
+    <!-- Modernizer for Portfolio -->
+    <script src='{% static "index/js/modernizer.js" %}'></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="host_version"> 
+
+  <!-- ASSIGNMENTS -->
+  <div class="modal fade" id="assignments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	  <div class="modal-content">
+		  <div class="modal-header tit-up">
+			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			  <h2 class="modal-title" style="font-size: 26px;">Assignments</h2>
+		  </div>
+		  <div class="modal-body customer-box">
+				  <div class="tab-pane" id="Registration">
+					  <form role="form" class="form-horizontal" action="{% url 'assignment_save' %}" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							  <div class="col-sm-12">
+								  <label style="font-size: 18px;">Semester</label>
+								<select class="form-control" name="sem"  id="sel1" onchange="semSelected()" required>
+									<option selected>Select...</option>
+									<option value="first">First</option>
+									<option value="second">Second</option>
+									<option value="third">Third</option>
+									<option value="fourth">Fourth</option>
+								  </select>
+							  </div>
+						  </div>
+						  <br>
+						  <div class="form-group">
+							<div class="col-sm-12">
+								<label style="font-size: 18px;">Course</label>
+							  <select class="form-control" name="course" id="sel2" required>
+								  <option selected>Select...</option>
+							  </select>
+							</div>
+							</div>
+							<br>
+						  <div class="form-group">
+							  <div class="col-sm-12">
+								<label style="font-size: 18px;">Assignment Topic</label>
+								  <input class="form-control" name="ass_topic" id="ass_topic" placeholder="Enter Assignment Topic" type="text" required>
+							  </div>
+						  </div>
+						  <br>
+						  <div class="form-group">
+							  <div class="col-sm-12">
+								<label style="font-size: 18px;">Submission Date</label>
+								  <input class="form-control" name="sub_date" id="sub_date" placeholder="Select Submission Date" type="date" required>
+							  </div>
+						  </div>
+						  <br>
+						  <div class="row">							
+							  <div class="col-sm-10">
+								  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+									  Submit
+								  </button>
+							  </div>
+						  </div>
+					  </form>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	</div>
+
+	<!-- STUDY MATERIALS -->
+	<div class="modal fade" id="study_materials" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		  <div class="modal-content">
+			  <div class="modal-header tit-up">
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h2 class="modal-title" style="font-size: 26px;">Study Materials / Notes</h2>
+			  </div>
+			  <div class="modal-body customer-box">
+					  <div class="tab-pane" id="Registration">
+						  <form role="form" class="form-horizontal" action="{% url 'materials_save' %}" method="POST">
+							  {% csrf_token %}
+							  <div class="form-group">
+								  <div class="col-sm-12">
+									  <label style="font-size: 18px;">Semester</label>
+									<select class="form-control" name="sem"  id="opt1" onchange="semSelectedForNotes()" required>
+										<option selected>Select...</option>
+										<option value="first">First</option>
+										<option value="second">Second</option>
+										<option value="third">Third</option>
+										<option value="fourth">Fourth</option>
+									  </select>
+								  </div>
+							  </div>
+							  <br>
+							  <div class="form-group">
+								<div class="col-sm-12">
+									<label style="font-size: 18px;">Course</label>
+								  <select class="form-control" name="course" id="opt2" required>
+									  <option selected>Select...</option>
+								  </select>
+								</div>
+							</div>
+							<br>
+							  <div class="form-group">
+								  <div class="col-sm-12">
+									<label style="font-size: 18px;">Upload Study Material</label>
+									  <input class="form-control" name="material" id="material" type="file" required>
+								  </div>
+							  </div>
+							  <br>
+							  <div class="row">							
+								  <div class="col-sm-10">
+									  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+										  Submit
+									  </button>
+								  </div>
+							  </div>
+						  </form>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+		</div>
+	
+	<!-- CLASSES -->
+		<div class="modal fade" id="classes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			  <div class="modal-content">
+				  <div class="modal-header tit-up">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h2 class="modal-title" style="font-size: 26px;">Create Session</h2>
+				  </div>
+				  <div class="modal-body customer-box">
+						  <div class="tab-pane" id="Registration">
+							  <form role="form" class="form-horizontal" action="{% url 'class_save' %}" method="POST">
+								  {% csrf_token %}
+								  <div class="form-group">
+									  <div class="col-sm-12">
+										  <label style="font-size: 18px;">Semester</label>
+										<select class="form-control" name="sem"  id="clsopt1" onchange="semSelectedForClasses()" required>
+											<option selected>Select...</option>
+											<option value="first">First</option>
+											<option value="second">Second</option>
+											<option value="third">Third</option>
+											<option value="fourth">Fourth</option>
+										  </select>
+									  </div>
+								  </div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+										<label style="font-size: 18px;">Course</label>
+									  <select class="form-control" name="course" id="clsopt2" required>
+										  <option selected>Select...</option>
+									  </select>
+									</div>
+								</div>
+								<br>
+								  <div class="form-group">
+									  <div class="col-sm-12">
+										<label style="font-size: 18px;">Class Link</label>
+										  <input class="form-control" name="class_link" id="class_link" type="text" placeholder="Enter class Link" required>
+									  </div>
+								  </div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Date</label>
+										<input class="form-control" name="date" id="date" placeholder="Select date" type="date" required>
+									</div>
+								</div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Start Time</label>
+										<input class="form-control" name="start_time" id="start_time" placeholder="Select Start Time" type="time" required>
+									</div>
+								</div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">End Time</label>
+										<input class="form-control" name="end_time" id="end_time" placeholder="Select End Time" type="time" required>
+									</div>
+								</div>
+								<br>
+								  <div class="row">							
+									  <div class="col-sm-10">
+										  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+											  Submit
+										  </button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+			</div>
+
+		<!-- EXAMS -->
+		<div class="modal fade" id="exams" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			  <div class="modal-content">
+				  <div class="modal-header tit-up">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h2 class="modal-title" style="font-size: 26px;">Question Papers</h2>
+				  </div>
+				  <div class="modal-body customer-box">
+						  <div class="tab-pane" id="Registration">
+							  <form role="form" class="form-horizontal" action="{% url 'qp_save' %}" method="POST">
+								  {% csrf_token %}
+								  <div class="form-group">
+									  <div class="col-sm-12">
+										  <label style="font-size: 18px;">Semester</label>
+										<select class="form-control" name="sem"  id="examopt1" onchange="semSelectedForExams()" required>
+											<option selected>Select...</option>
+											<option value="first">First</option>
+											<option value="second">Second</option>
+											<option value="third">Third</option>
+											<option value="fourth">Fourth</option>
+										  </select>
+									  </div>
+								  </div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+										<label style="font-size: 18px;">Course</label>
+									  <select class="form-control" name="course" id="examopt2" required>
+										  <option selected>Select...</option>
+									  </select>
+									</div>
+								</div>
+								<br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Date</label>
+										<input class="form-control" name="date" id="date" placeholder="Select date" type="date" required>
+									</div>
+								</div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Start Time</label>
+										<input class="form-control" name="start_time" id="start_time" placeholder="Select Start Time" type="time" required>
+									</div>
+								</div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">End Time</label>
+										<input class="form-control" name="end_time" id="end_time" placeholder="Select End Time" type="time" required>
+									</div>
+								</div>
+								<br>
+								  <div class="form-group">
+									  <div class="col-sm-12">
+										<label style="font-size: 18px;">Upload Question Paper</label>
+										  <input class="form-control" name="qp" id="qp" type="file" required>
+									  </div>
+								  </div>
+								  <br>
+								  <div class="row">							
+									  <div class="col-sm-10">
+										  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+											  Submit
+										  </button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+			</div>
+
+		<!-- ADD PHOTOS -->
+		<div class="modal fade" id="add_photos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			  <div class="modal-content">
+				  <div class="modal-header tit-up">
+					  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					  <h2 class="modal-title" style="font-size: 26px;">Add Photos</h2>
+				  </div>
+				  <div class="modal-body customer-box">
+						  <div class="tab-pane" id="Registration">
+							  <form role="form" class="form-horizontal" action="{% url 'photo_save' %}" method="POST">
+								  {% csrf_token %}
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Title</label>
+										<input class="form-control" name="title" id="title" placeholder="Enter Title" type="text">
+									</div>
+								</div>
+								<br>
+								  <div class="form-group">
+									  <div class="col-sm-12">
+										<label style="font-size: 18px;">Upload Photo</label>
+										  <input class="form-control" name="photo" id="photo" type="file" required>
+									  </div>
+								  </div>
+								  <br>
+								  <div class="form-group">
+									<div class="col-sm-12">
+									  <label style="font-size: 18px;">Description</label>
+										<textarea class="form-control" name="descr" placeholder="Type description here" name="des" id="des" cols="30" rows="10"></textarea>
+									</div>
+								</div>
+								  <br>
+								  <div class="row">							
+									  <div class="col-sm-10">
+										  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+											  Submit
+										  </button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+			</div>
+  </div>
+
+
+
+    <!-- LOADER -->
+	<div id="preloader">
+		<div class="loader-container">
+			<div class="progress-br float shadow">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOADER -->	
+
+    <!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{% url 'teachers_official' %}">
+					<font class="logo_font" style="color: white; font-size: 30px;">LERN</font>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-host">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="{% url 'teachers_official' %}">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#assignments">Assignments</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#study_materials">Materials</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#classes">Classes</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#exams">Exams</a></li>
+						<li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#add_photos">Add Photos</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'view_profile' %}">Profile</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log orange" href="{% url 'sign_out' %}"><span>Sign Out</span></a></li>
+                    </ul>
+					
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Welcome {{prof.name}}</h1>
+		</div>
+	</div>	
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>About US</h3>
+                        </div>
+                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                        <div class="footer-right">
+							<ul class="footer-links-soi">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-github"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							</ul><!-- end links -->
+						</div>
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+
+				<div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Information Link</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Pricing</a></li>
+							<li><a href="#">About</a></li>
+							<li><a href="#">Contact</a></li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+				
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Contact Details</h3>
+                        </div>
+
+                        <ul class="footer-links">
+                            <li><a href="mailto:#">info@yoursite.com</a></li>
+                            <li><a href="#">www.yoursite.com</a></li>
+                            <li>PO Box 16122 Collins Street West Victoria 8007 Australia</li>
+                            <li>+61 3 8376 6284</li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+				
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer><!-- end footer -->
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="footer-distributed">
+                <div class="footer-center">                   
+                    <p class="footer-company-name">All Rights Reserved. &copy; 2022 <a href="#">LERN</a> Design by Poonchola Technologies</p>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+    <!-- ALL JS FILES -->
+    <script src='{% static "index/js/all.js" %}'></script>
+    <!-- ALL PLUGINS -->
+    <script src='{% static "index/js/custom.js" %}'></script>
+
+
+	<script>
+		function semSelected() {
+			var s1=document.getElementById('sel1').value;
+			if(s1 == 'first') {
+				jQuery('#sel2').empty();
+				var courses= [
+				'Probability, Statistics and Computational Mathematics', 
+				'Data Structures using C', 
+				'Database Management System with SQL/PLSQL',
+				'Data Communications and Computer Networks',
+				'Operating Systems with Linux as Case study',
+				'Data Structures Lab',
+				'DBMS Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('sel2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'second') {
+				jQuery('#sel2').empty();
+				var courses= [
+				'Operations Research',
+				'Java Programming',
+				'Advanced Software Engineering',
+				'Design and Analysis of Algorithms',
+				'Artificial Intelligence',
+				'Web Technology Lab',
+				'Java Programming Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('sel2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'third') {
+				jQuery('#sel2').empty();
+				var courses= [
+				'Business Management and Financial Accounting',
+				'Theory of Computation and Compilers',
+				'Data Mining',
+				'Information Security',
+				'.Net using c#',
+				'Data Analytics using Python',
+				'Android'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('sel2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'fourth') {
+				jQuery('#sel2').empty();
+				var courses= [
+				'Parallel Programming using OpenMP',
+				'Flutter using Dart'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('sel2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else{
+				jQuery('#sel2').empty();
+				var s2=document.getElementById('sel2');
+				var option=document.createElement('option');
+				option.innerHTML='Select...';
+				option.value=1;
+				s2.options.add(option);
+			}
+		}
+
+
+		function semSelectedForNotes() {
+			var s1=document.getElementById('opt1').value;
+			if(s1 == 'first') {
+				jQuery('#opt2').empty();
+				var courses= [
+				'Probability, Statistics and Computational Mathematics', 
+				'Data Structures using C', 
+				'Database Management System with SQL/PLSQL',
+				'Data Communications and Computer Networks',
+				'Operating Systems with Linux as Case study',
+				'Data Structures Lab',
+				'DBMS Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('opt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'second') {
+				jQuery('#opt2').empty();
+				var courses= [
+				'Operations Research',
+				'Java Programming',
+				'Advanced Software Engineering',
+				'Design and Analysis of Algorithms',
+				'Artificial Intelligence',
+				'Web Technology Lab',
+				'Java Programming Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('opt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'third') {
+				jQuery('#opt2').empty();
+				var courses= [
+				'Business Management and Financial Accounting',
+				'Theory of Computation and Compilers',
+				'Data Mining',
+				'Information Security',
+				'.Net using c#',
+				'Data Analytics using Python',
+				'Android'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('opt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'fourth') {
+				jQuery('#opt2').empty();
+				var courses= [
+				'Parallel Programming using OpenMP',
+				'Flutter using Dart'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('opt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else{
+				jQuery('#opt2').empty();
+				var s2=document.getElementById('opt2');
+				var option=document.createElement('option');
+				option.innerHTML='Select...';
+				option.value=1;
+				s2.options.add(option);
+			}
+		}
+
+		function semSelectedForClasses() {
+			var s1=document.getElementById('clsopt1').value;
+			if(s1 == 'first') {
+				jQuery('#clsopt2').empty();
+				var courses= [
+				'Probability, Statistics and Computational Mathematics', 
+				'Data Structures using C', 
+				'Database Management System with SQL/PLSQL',
+				'Data Communications and Computer Networks',
+				'Operating Systems with Linux as Case study',
+				'Data Structures Lab',
+				'DBMS Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('clsopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'second') {
+				jQuery('#clsopt2').empty();
+				var courses= [
+				'Operations Research',
+				'Java Programming',
+				'Advanced Software Engineering',
+				'Design and Analysis of Algorithms',
+				'Artificial Intelligence',
+				'Web Technology Lab',
+				'Java Programming Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('clsopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'third') {
+				jQuery('#clsopt2').empty();
+				var courses= [
+				'Business Management and Financial Accounting',
+				'Theory of Computation and Compilers',
+				'Data Mining',
+				'Information Security',
+				'.Net using c#',
+				'Data Analytics using Python',
+				'Android'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('clsopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'fourth') {
+				jQuery('#clsopt2').empty();
+				var courses= [
+				'Parallel Programming using OpenMP',
+				'Flutter using Dart'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('clsopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else{
+				jQuery('#clsopt2').empty();
+				var s2=document.getElementById('clsopt2');
+				var option=document.createElement('option');
+				option.innerHTML='Select...';
+				option.value=1;
+				s2.options.add(option);
+			}
+		}
+
+		function semSelectedForExams() {
+			var s1=document.getElementById('examopt1').value;
+			if(s1 == 'first') {
+				jQuery('#examopt2').empty();
+				var courses= [
+				'Probability, Statistics and Computational Mathematics', 
+				'Data Structures using C', 
+				'Database Management System with SQL/PLSQL',
+				'Data Communications and Computer Networks',
+				'Operating Systems with Linux as Case study',
+				'Data Structures Lab',
+				'DBMS Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('examopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'second') {
+				jQuery('#examopt2').empty();
+				var courses= [
+				'Operations Research',
+				'Java Programming',
+				'Advanced Software Engineering',
+				'Design and Analysis of Algorithms',
+				'Artificial Intelligence',
+				'Web Technology Lab',
+				'Java Programming Lab'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('examopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'third') {
+				jQuery('#examopt2').empty();
+				var courses= [
+				'Business Management and Financial Accounting',
+				'Theory of Computation and Compilers',
+				'Data Mining',
+				'Information Security',
+				'.Net using c#',
+				'Data Analytics using Python',
+				'Android'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('examopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else if(s1 == 'fourth') {
+				jQuery('#examopt2').empty();
+				var courses= [
+				'Parallel Programming using OpenMP',
+				'Flutter using Dart'
+				];
+
+				for(i in courses) {
+					var s2=document.getElementById('examopt2');
+					var option=document.createElement('option');
+					option.innerHTML=courses[i];
+					option.value=courses[i];
+					s2.options.add(option);
+				}
+			}
+			else{
+				jQuery('#examopt2').empty();
+				var s2=document.getElementById('examopt2');
+				var option=document.createElement('option');
+				option.innerHTML='Select...';
+				option.value=1;
+				s2.options.add(option);
+			}
+		}
+	</script>
+
+</body>
+</html>
